@@ -1,0 +1,41 @@
+
+pipeline {
+    agent any
+    tools {
+                maven 'mvn396'
+                jdk 'jdk11'
+                }  
+    stages {
+        stage('cloning the github') {
+            steps {
+
+                 git branch: 'master', url: 'https://github.com/padamkirankumar/java-hello-world-with-maven.git'
+            }
+        }
+        
+        stage('BUILDING THE MAVEN PROJECT') {
+	            steps {
+	
+	                 sh '''
+	                 
+	                 mvn clean package
+	                 
+	                 '''
+	            }
+        }
+        
+        stage('running the JAR') {
+		            steps {
+		
+		                 sh '''
+		                 
+		                ls -la
+		                cd target
+		                java -jar *.jar
+		                 
+		                 '''
+		            }
+        }
+        
+           }
+}
