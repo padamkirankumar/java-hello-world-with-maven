@@ -16,7 +16,6 @@ pipeline {
                 maven 'mvn396'
                 jdk 'jdk11'
                 }  
-                agent { label 'tomcatvm' }
 	            steps {
 	
 	                 sh '''
