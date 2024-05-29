@@ -1,12 +1,10 @@
 
 pipeline {
-     agent { label 'tomcatvm' }
-    tools {
-                maven 'mvn396'
-                jdk 'jdk11'
-                }  
+     agent any    
     stages {
         stage('cloning the github') {
+          
+          agent { label 'tomcatvm' }
             steps {
 
                  git branch: 'master', url: 'https://github.com/padamkirankumar/java-hello-world-with-maven.git'
@@ -14,6 +12,11 @@ pipeline {
         }
         
         stage('BUILDING THE MAVEN PROJECT') {
+                    tools {
+                maven 'mvn396'
+                jdk 'jdk11'
+                }  
+                agent { label 'tomcatvm' }
 	            steps {
 	
 	                 sh '''
