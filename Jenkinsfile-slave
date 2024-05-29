@@ -12,6 +12,7 @@ pipeline {
                 sh '''
 			    cd /opt/
 			    ls -la
+                            mvn --version
                 '''
 
 }
