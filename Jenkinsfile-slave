@@ -1,19 +1,22 @@
-
-node('tomcatvm') {
-    // Define tools
-    def jdk = tool name: 'jdk11', type: 'jdk'
-    def maven = tool name: 'mvn396', type: 'maven'
-    
-    // Set environment variables
-    env.JAVA_HOME = jdk
-    env.PATH = "${jdk}/bin:${maven}/bin:${env.PATH}"
-}
 pipeline {
-    stage('Build') {
-        steps {
-            sh 'java -version'
-            sh 'mvn --version'
-        }
+    agent none
+    stages {
+        stage('dev') {
+            tools {
+                maven 'mvn396'
+                 jdk 'jdk11'
+                } 
+            agent { label 'tomcatvm' }
+            steps {
+               git branch: 'master', url: 'https://github.com/padamkirankumar/java-hello-world-with-maven.git'
+                sh '''
+			    cd /opt/
+			    ls -la
+                '''
+
+}
+
+           }
+ 
     }
 }
-
