@@ -27,13 +27,16 @@ pipeline {
         }
         
         stage('running the JAR') {
+                      agent { label 'tomcatvm' }
 		            steps {
 		
 		                 sh '''
 		                 
 		                ls -la
 		                cd target
-		                java -jar *.jar
+                                mv *.jar *.war
+		                cp *.war /opt/tomcat9/webapps/
+                                ls -la /opt/tomcat9/webapps/
 		                 
 		                 '''
 		            }
