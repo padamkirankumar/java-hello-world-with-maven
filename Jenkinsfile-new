@@ -19,6 +19,7 @@ pipeline {
 	            steps {
 	
 	                 sh '''
+                         export JAVA_HOME=/opt/jdk-17.0.11
                          sh /opt/apache-maven-3.9.6/bin/mvn clean package
 	                 
 	                 '''
